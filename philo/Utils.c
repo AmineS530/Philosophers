@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:09:12 by asadik            #+#    #+#             */
-/*   Updated: 2023/03/29 18:19:00 by asadik           ###   ########.fr       */
+/*   Updated: 2023/03/30 17:10:44 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,37 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-// putstr_fd to print texts and errors
+// putstr_fd to print errors
 void	ft_putstr_fd(char *s, int fd)
 {
 	if (s == 0)
 		return ;
 	while (*s)
 		write (fd, s++, 1);
+}
+
+int	better_ft_isdigit(char *nbr)
+{
+	int	i;
+
+	i = 0;
+	while (nbr[i + 1] != '\0')
+	{
+		if (nbr[i] == '-' || nbr[i] == '+')
+		{
+			if (ft_isdigit(nbr[i + 1]))
+				return (1);
+			else
+				return (ft_isdigit(nbr[i]));
+		}
+		i++;
+	}
+	return (ft_isdigit(nbr[i]));
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
