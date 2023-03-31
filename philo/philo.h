@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:58 by asadik            #+#    #+#             */
-/*   Updated: 2023/03/30 18:00:28 by asadik           ###   ########.fr       */
+/*   Updated: 2023/03/31 18:17:03 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,22 @@ typedef struct s_data
 
 typedef struct s_philosopher
 {
-	int	position;
-	int	is_dead;
+	long	philo_creation;
+	int		position;
+	int		is_dead;
 }		t_philosopher;
 
+//*		Utils
 int		ft_atoi(const char *str);
 void	ft_putstr_fd(char *s, int fd);
 int		better_ft_isdigit(char *nbr);
 int		ft_isdigit(int c);
 
+//*		Utils_2
+int	ft_print_error(char *str);
+
+//*		handling_args
 int		handle_args(t_data *info,int argc, char *argv[]);
+int		check_info(t_data *info);
 
 #endif

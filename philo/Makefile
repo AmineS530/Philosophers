@@ -6,6 +6,9 @@ NAME = philosophers
 
 SRC_M = heart.c \
 		Utils.c \
+		Utils_2.c \
+		handling_args.c \
+
 
 OBJ_M = $(SRC_M:.c=.o)
 
