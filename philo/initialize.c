@@ -6,10 +6,13 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:31:00 by asadik            #+#    #+#             */
-/*   Updated: 2023/03/31 17:31:24 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/01 00:50:09 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
+int	init_philos(t_data *philo)
+{
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:22 by asadik            #+#    #+#             */
-/*   Updated: 2023/03/31 18:02:16 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/01 00:52:40 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	check(void)
 int	main(int argc, char *argv[])
 {
 	t_data		all;
-	pthread_t	*philos;
 	void* (*ptr)(void *) = (void* (*)(void *))main;
 
 	if (argc == 5 || argc == 6)
@@ -33,17 +32,6 @@ int	main(int argc, char *argv[])
 			return (1);
 		if (check_info(&all) == 1)
 			return (1);
-		philos = malloc(sizeof(pthread_t) * (all.number_of_philosophers + 1));
-		if (!philos)
-			return (1);
-		all.i = 0;
-		while (all.i < all.number_of_philosophers)
-			pthread_create(&philos[all.i++], NULL, ptr, NULL);
-		all.i = 0;
-		printf("ayaya \n");
-		while (all.i < all.number_of_philosophers)
-			pthread_join(philos[all.i++], NULL);
-		free(philos);
 	}
 	else
 		ft_print_error(RED"Usage: ./philosophers number_of_philosophers time_to_die"
@@ -51,3 +39,12 @@ int	main(int argc, char *argv[])
 				" [number_of_times_each_philosopher_must_eat]"DEFAULT);
 	return (0);
 }
+
+		// all.i = 0;
+		// while (all.i < all.number_of_philosophers)
+		// 	pthread_create(&philos[all.i++], NULL, ptr, NULL);
+		// all.i = 0;
+		// printf("ayaya \n");
+		// while (all.i < all.number_of_philosophers)
+		// 	pthread_join(philos[all.i++], NULL);
+		// free(philos);
