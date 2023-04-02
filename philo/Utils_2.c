@@ -6,32 +6,89 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:57:59 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/01 00:50:19 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/02 19:58:16 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_print_error(char *str)
+t_data	*ft_lstnew(int pos)
 {
-	ft_putstr_fd(str, 2);
-	return (1);
+	t_data	*poggers;
+
+	poggers = malloc(sizeof(t_data));
+	if (!poggers)
+		return (NULL);
+	poggers->position = pos;
+	if (pos == 0)
+		poggers->real_head = TRUE;
+	else
+		poggers->real_head = FALSE;
+	poggers->skip = FALSE;
+	poggers->is_dead = FALSE;
+	poggers->philo_creation_time = ft_time();
+	poggers->has_eaten = FALSE;
+	poggers->next = NULL;
+	return (poggers);
 }
 
-long	ft_time(void)
+void	ft_lstadd_back(t_data **lst, t_data *new)
 {
-	long			ayaya;
-	struct timeval	ze_time;
+	t_data	*tmp;
+
+	if (!lst)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	tmp = *lst;
+	while (tmp->next != NULL)
+	{
+		tmp = tmp->next;
+	}
+	tmp->next = new;
+}
+
+void	ft_lstclear(t_data **lst)
+{
+	t_data	*tmp;
+
+	if (!lst)
+		return ;
+	tmp = (*lst);
+	while (lst && *lst)
+	{
+		if (tmp != NULL)
+		{
+			while (tmp != NULL)
+			{
+				tmp = (*lst)->next;
+				free (*lst);
+				*lst = tmp;
+			}
+		}
+		else
+			break ;
+	}
+	return ;
+}
+
+long long	ft_time(void)
+{
+	long long			ayaya;
+	struct timeval		ze_time;
 
 	gettimeofday(&ze_time, NULL);
-	ayaya = (ze_time.tv_sec * 1000) + (ze_time.tv_sec / 1000);
+	ayaya = ((ze_time.tv_sec * 1000 ) + (ze_time.tv_usec / 1000));
 	return (ayaya);
 }
 
-long	time_stamp(t_philosopher *the_time)
+long long	time_stamp(t_data *the_time)
 {
-	long	time_currently;
+	long long	time_currently;
 
 	time_currently = ft_time() - the_time->philo_creation_time;
-	return (time_currently);
+	return (ft_time() - the_time->philo_creation_time);
 }

@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:58 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/01 00:51:33 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/02 18:49:25 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,41 +25,48 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef struct s_philosopher
-{
-	long		philo_creation_time;
-	int			position;
-	int			fork_left;
-	int			fork_right;
-	int			is_dead;
-	int			has_eaten;
-	pthread_t	his_thread;
-}				t_philosopher;
 typedef struct s_data
 {
-	int				i;
-	int				number_of_philosophers;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				number_of_times_each_philosopher_must_eat;
-	t_philosopher	the_philo;
-}		t_data;
-
+	int						i;
+	int						number_of_philosophers;
+	int						time_to_die;
+	int						time_to_eat;
+	int						time_to_sleep;
+	int						number_of_times_each_philosopher_must_eat;
+	pthread_t				*thread;
+	int						position;
+	long long				philo_creation_time;
+	int						real_head;
+	int						skip;
+	int						is_dead;
+	int						has_eaten;
+	pthread_mutex_t			fork_left;
+	pthread_mutex_t			*fork_right;
+	struct s_data			*next;
+}				t_data;
 
 //*		Utils
-int		ft_atoi(const char *str);
-void	ft_putstr_fd(char *s, int fd);
-int		better_ft_isdigit(char *nbr);
-int		ft_isdigit(int c);
+int			ft_atoi(const char *str);
+void		ft_putstr_fd(char *s, int fd);
+int			ft_print_error(char *str);
+int			better_ft_isdigit(char *nbr);
+int			ft_isdigit(int c);
 
 //*		Utils_2
-int		ft_print_error(char *str);
-long	ft_time(void);
-long	time_stamp(t_philosopher *the_time);
+t_data		*ft_lstnew(int pos);
+void		ft_lstadd_back(t_data **lst, t_data *new);
+void		ft_lstclear(t_data **lst);
+long long	ft_time(void);
+long long	time_stamp(t_data *the_time);
+
+//*		Utils_3
+t_data		*ft_loop_lst(t_data *lst);
 
 //*		handling_args
-int		handle_args(t_data *info,int argc, char *argv[]);
-int		check_info(t_data *info);
+int			handle_args(t_data *info, int argc, char *argv[]);
+int			check_info(t_data *info);
 
+//* initialize
+int			init_philos(t_data *info);
+void		*check_if_dead(void *ded);
 #endif

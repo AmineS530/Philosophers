@@ -6,13 +6,13 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:17:02 by asadik            #+#    #+#             */
-/*   Updated: 2023/03/31 17:21:42 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/02 18:36:43 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	handle_args(t_data *info,int argc, char *argv[])
+int	handle_args(t_data *info, int argc, char *argv[])
 {
 	info->i = 1;
 	while (argv[info->i])
@@ -25,7 +25,8 @@ int	handle_args(t_data *info,int argc, char *argv[])
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
-	if (argc == 6){
+	if (argc == 6)
+	{
 		info->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 		if (info->number_of_times_each_philosopher_must_eat < 0)
 			ft_print_error(RED"Erro\nInvalid Optional argument"DEFAULT);
@@ -39,7 +40,7 @@ int	check_info(t_data *info)
 		ft_print_error(RED"Error\nInvalid number of philosophers"DEFAULT);
 	if (info->time_to_die < 0)
 		ft_print_error(RED"Error\nInvalid Death timer"DEFAULT);
-	if (info->time_to_eat  < 0)
+	if (info->time_to_eat < 0)
 		ft_print_error(RED"Error\nInvalid time_to_eat"DEFAULT);
 	if (info->time_to_sleep < 0)
 		ft_print_error(RED"Error\nInvalid Sleep timer"DEFAULT);

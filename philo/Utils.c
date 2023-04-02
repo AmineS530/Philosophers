@@ -6,13 +6,12 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:09:12 by asadik            #+#    #+#             */
-/*   Updated: 2023/03/30 17:10:44 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/01 17:13:53 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// atoi to convert the args
 int	ft_atoi(const char *str)
 {
 	int	sign;
@@ -41,13 +40,18 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-// putstr_fd to print errors
 void	ft_putstr_fd(char *s, int fd)
 {
 	if (s == 0)
 		return ;
 	while (*s)
 		write (fd, s++, 1);
+}
+
+int	ft_print_error(char *str)
+{
+	ft_putstr_fd(str, 2);
+	return (1);
 }
 
 int	better_ft_isdigit(char *nbr)
