@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:58 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/02 18:49:25 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/03 01:03:38 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_data
 	int						number_of_times_each_philosopher_must_eat;
 	pthread_t				*thread;
 	int						position;
-	long long				philo_creation_time;
+	long				philo_creation_time;
 	int						real_head;
 	int						skip;
 	int						is_dead;
@@ -56,8 +56,8 @@ int			ft_isdigit(int c);
 t_data		*ft_lstnew(int pos);
 void		ft_lstadd_back(t_data **lst, t_data *new);
 void		ft_lstclear(t_data **lst);
-long long	ft_time(void);
-long long	time_stamp(t_data *the_time);
+long	ft_time(void);
+long	time_stamp(t_data *the_time);
 
 //*		Utils_3
 t_data		*ft_loop_lst(t_data *lst);

@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:57:59 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/02 19:58:16 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/03 01:06:35 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_data	*ft_lstnew(int pos)
 		poggers->real_head = FALSE;
 	poggers->skip = FALSE;
 	poggers->is_dead = FALSE;
-	poggers->philo_creation_time = ft_time();
 	poggers->has_eaten = FALSE;
 	poggers->next = NULL;
 	return (poggers);
@@ -75,9 +74,9 @@ void	ft_lstclear(t_data **lst)
 	return ;
 }
 
-long long	ft_time(void)
+long	ft_time(void)
 {
-	long long			ayaya;
+	long			ayaya;
 	struct timeval		ze_time;
 
 	gettimeofday(&ze_time, NULL);
@@ -85,10 +84,7 @@ long long	ft_time(void)
 	return (ayaya);
 }
 
-long long	time_stamp(t_data *the_time)
+long	time_stamp(t_data *the_time)
 {
-	long long	time_currently;
-
-	time_currently = ft_time() - the_time->philo_creation_time;
 	return (ft_time() - the_time->philo_creation_time);
 }
