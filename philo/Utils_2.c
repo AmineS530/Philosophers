@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:57:59 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/03 15:49:13 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/03 15:51:59 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ void	ft_lstclear(t_data **lst)
 long	ft_time(void)
 {
 	long			ayaya;
-	struct timeval		ze_time;
+	struct timeval	ze_time;
 
 	gettimeofday(&ze_time, NULL);
-	ayaya = ((ze_time.tv_sec * 1000 ) + (ze_time.tv_usec / 1000));
+	ayaya = ((ze_time.tv_sec * 1000) + (ze_time.tv_usec / 1000));
 	return (ayaya);
 }
 

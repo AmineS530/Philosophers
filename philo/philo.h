@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:58 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/03 15:37:14 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/03 15:51:19 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef struct s_basics
-{
-
-}				t_basics;
-
 typedef struct s_data
 {
 	int					i;
@@ -39,7 +34,6 @@ typedef struct s_data
 	int					time_to_sleep;
 	int					number_of_times_each_philosopher_must_eat;
 	pthread_t			*thread;
-	// struct s_data		info;
 	int					real_head;
 	int					position;
 	long				philo_creation_time;
@@ -62,8 +56,8 @@ int			ft_isdigit(int c);
 t_data		*ft_lstnew(int pos);
 void		ft_lstadd_back(t_data **lst, t_data *new);
 void		ft_lstclear(t_data **lst);
-long	ft_time(void);
-long	time_stamp(t_data *the_time);
+long		ft_time(void);
+long		time_stamp(t_data *the_time);
 
 //*		Utils_3
 t_data		*ft_loop_lst(t_data *lst);
