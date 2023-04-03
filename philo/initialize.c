@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:31:00 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/03 01:49:10 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/03 15:48:58 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int	init_philos(t_data *info)
 	while (info->i < info->number_of_philosophers)
 	{
 		if (pthread_create(&info->thread[info->i++],
-				NULL, check_if_dead, &philosophers->next) != 0)
+				NULL, check_if_dead, philosophers) != 0)
 			return (1);
+		philosophers = philosophers->next;
 	}
 	info->i = 0;
 	while (info->i < info->number_of_philosophers)

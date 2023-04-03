@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:58 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/03 01:03:38 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/03 15:37:14 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,30 @@
 # define TRUE 1
 # define FALSE 0
 
+typedef struct s_basics
+{
+
+}				t_basics;
+
 typedef struct s_data
 {
-	int						i;
-	int						number_of_philosophers;
-	int						time_to_die;
-	int						time_to_eat;
-	int						time_to_sleep;
-	int						number_of_times_each_philosopher_must_eat;
-	pthread_t				*thread;
-	int						position;
+	int					i;
+	int					number_of_philosophers;
+	int					time_to_die;
+	int					time_to_eat;
+	int					time_to_sleep;
+	int					number_of_times_each_philosopher_must_eat;
+	pthread_t			*thread;
+	// struct s_data		info;
+	int					real_head;
+	int					position;
 	long				philo_creation_time;
-	int						real_head;
-	int						skip;
-	int						is_dead;
-	int						has_eaten;
-	pthread_mutex_t			fork_left;
-	pthread_mutex_t			*fork_right;
-	struct s_data			*next;
+	int					is_dead;
+	int					has_eaten;
+	pthread_mutex_t		fork_left;
+	pthread_mutex_t		*fork_right;
+	struct s_data		*next;
+	int					skip;
 }				t_data;
 
 //*		Utils
