@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:57:59 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/03 15:51:59 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/03 18:37:58 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_data	*ft_lstnew(int pos)
 		poggers->real_head = TRUE;
 	else
 		poggers->real_head = FALSE;
-	poggers->skip = FALSE;
+	poggers->philo_creation_time = ft_time();
+	poggers->finished = FALSE;
 	poggers->is_dead = FALSE;
 	poggers->has_eaten = FALSE;
 	poggers->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:22 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/02 18:37:45 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/03 18:44:18 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,23 @@ void	check(void)
 {
 	system("leaks philosophers");
 }
-
 	// atexit(check);
+
 int	main(int argc, char *argv[])
 {
 	t_data		all;
+	t_basics	stuff;
 
 	if (argc == 5 || argc == 6)
 	{
-		if (handle_args(&all, argc, argv) == 1)
+		if (handle_args(&stuff, argc, argv) == 1)
 			return (1);
-		if (check_info(&all) == 1)
+		if (check_info(&stuff) == 1)
 			return (1);
-		if (init_philos(&all) == 1)
+		all.info = &stuff;
+		if (init(&all) == 1)
 			return (1);
-		free (all.thread);
+		free (all.info->thread);
 	}
 	else
 		ft_print_error(RED"Usage: ./philosophers number_of_philosophers"

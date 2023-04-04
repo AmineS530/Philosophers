@@ -10,6 +10,7 @@ SRC_M = heart.c \
 		Utils_3.c \
 		handling_args.c \
 		initialize.c \
+		actions.c \
 
 OBJ_M = $(SRC_M:.c=.o)
 
@@ -27,5 +28,3 @@ fclean : clean
 	rm -rf $(NAME)
 
 re : fclean all
-
-
