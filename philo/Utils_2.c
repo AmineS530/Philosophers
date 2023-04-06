@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:57:59 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/03 18:37:58 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/06 20:31:11 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_data	*ft_lstnew(int pos)
 		poggers->real_head = TRUE;
 	else
 		poggers->real_head = FALSE;
+	poggers->end_tail = FALSE;
 	poggers->philo_creation_time = ft_time();
-	poggers->finished = FALSE;
 	poggers->is_dead = FALSE;
 	poggers->has_eaten = FALSE;
 	poggers->next = NULL;
@@ -58,20 +58,13 @@ void	ft_lstclear(t_data **lst)
 	if (!lst)
 		return ;
 	tmp = (*lst);
-	while (lst && *lst)
+	while (tmp->end_tail != TRUE)
 	{
-		if (tmp != NULL)
-		{
-			while (tmp != NULL)
-			{
-				tmp = (*lst)->next;
-				free (*lst);
-				*lst = tmp;
-			}
-		}
-		else
-			break ;
+		tmp = (*lst)->next;
+		free (*lst);
+		*lst = tmp;
 	}
+	free (*lst);
 	return ;
 }
 

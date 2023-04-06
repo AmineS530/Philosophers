@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:58 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/04 17:58:39 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/06 17:51:41 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define TRUE 1
 # define FALSE 0
 
+typedef struct s_data t_data;
 typedef struct s_basics
 {
 	int					i;
@@ -34,12 +35,14 @@ typedef struct s_basics
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					number_of_times_each_philosopher_must_eat;
+	t_data				*philos;
 	pthread_t			*thread;
 	pthread_mutex_t		*fork_n;
 }				t_basics;
 typedef struct s_data
 {
 	int					real_head;
+	int					end_tail;
 	int					position;
 	long				philo_creation_time;
 	int					is_dead;
@@ -76,4 +79,7 @@ int			create_join(t_data *thing);
 
 //* actions
 void		*check_if_dead(void *ded);
+
+void ft_free(t_data *all);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:22 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/03 18:44:18 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/06 19:57:17 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,17 @@ void	check(void)
 {
 	system("leaks philosophers");
 }
-	// atexit(check);
+
+void ft_free(t_data *all)
+{
+	ft_lstclear(&all->info->philos);
+	free (all->info->thread);
+	free (all->info->fork_n);
+}
 
 int	main(int argc, char *argv[])
 {
+	atexit(check);
 	t_data		all;
 	t_basics	stuff;
 
@@ -33,9 +40,10 @@ int	main(int argc, char *argv[])
 		if (check_info(&stuff) == 1)
 			return (1);
 		all.info = &stuff;
+		all.info->finished = FALSE;
 		if (init(&all) == 1)
 			return (1);
-		free (all.info->thread);
+		ft_free(&all);
 	}
 	else
 		ft_print_error(RED"Usage: ./philosophers number_of_philosophers"

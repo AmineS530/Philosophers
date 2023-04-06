@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:31:00 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/04 17:57:21 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/06 18:40:20 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	init(t_data *thing)
 			* (thing->info->number_of_philosophers));
 	if (!thing->info->thread)
 		return (1);
-	thing = init_philos(thing);
+	thing->info->philos = init_philos(thing);
 	if (create_join(thing) == 1)
 		return (1);
 	return (0);
@@ -38,6 +38,8 @@ t_data	*init_philos(t_data *thing)
 	{
 		new = ft_lstnew(thing->info->i++);
 		new->info = thing->info;
+		if (thing->info->i == thing->info->number_of_philosophers)
+			new->end_tail = TRUE;
 		ft_lstadd_back(&philosophers, new);
 	}
 	philosophers = ft_loop_lst(philosophers);
@@ -50,10 +52,10 @@ int	create_join(t_data *thing)
 	while (thing->info->i < thing->info->number_of_philosophers)
 	{
 		if (pthread_create(&thing->info->thread[thing->info->i++],
-				NULL, check_if_dead, thing) != 0)
+				NULL, check_if_dead, thing->info->philos) != 0)
 			return (1);
 		usleep(69);
-		thing = thing->next;
+		thing->info->philos = thing->info->philos->next;
 	}
 	thing->info->i = 0;
 	while (thing->info->i < thing->info->number_of_philosophers)
