@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:17:02 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/05 01:13:20 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/15 21:07:09 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	handle_args(t_basics *info, int argc, char *argv[])
 	if (argc == 6)
 	{
 		info->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
-		if (info->number_of_times_each_philosopher_must_eat < 0)
-			return (ft_print_error(RED"Erro\nInvalid Optional argument"DEFAULT));
+		if (info->number_of_times_each_philosopher_must_eat <= 0)
+			return (ft_print_error(RED"Error\nInvalid Optional argument"DEFAULT));
 	}
 	return (0);
 }
@@ -39,11 +39,11 @@ int	check_info(t_basics *info)
 	if (info->number_of_philosophers <= 0)
 		return (ft_print_error(RED"Error\n"
 				"Invalid number of philosophers"DEFAULT));
-	if (info->time_to_die < 0)
+	if (info->time_to_die <= 0)
 		return (ft_print_error(RED"Error\nInvalid Death timer"DEFAULT));
-	if (info->time_to_eat < 0)
+	if (info->time_to_eat <= 0)
 		return (ft_print_error(RED"Error\nInvalid time_to_eat"DEFAULT));
-	if (info->time_to_sleep < 0)
+	if (info->time_to_sleep <= 0)
 		return (ft_print_error(RED"Error\nInvalid Sleep timer"DEFAULT));
 	return (0);
 }

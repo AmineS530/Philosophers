@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:57:59 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/06 20:31:11 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/15 21:13:22 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ t_data	*ft_lstnew(int pos)
 		poggers->real_head = FALSE;
 	poggers->end_tail = FALSE;
 	poggers->philo_creation_time = ft_time();
+	poggers->last_time_ate = poggers->philo_creation_time;
 	poggers->is_dead = FALSE;
-	poggers->has_eaten = FALSE;
+	poggers->has_eaten = 0;
 	poggers->next = NULL;
 	return (poggers);
 }

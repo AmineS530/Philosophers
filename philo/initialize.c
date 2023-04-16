@@ -6,12 +6,11 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:31:00 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/06 18:40:20 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/16 20:49:01 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 int	init(t_data *thing)
 {
@@ -19,9 +18,11 @@ int	init(t_data *thing)
 			* (thing->info->number_of_philosophers));
 	thing->info->fork_n = malloc(sizeof(pthread_mutex_t)
 			* (thing->info->number_of_philosophers));
-	if (!thing->info->thread)
+	if (!thing->info->thread || !thing->info->fork_n)
 		return (1);
+	init_mutex(thing);
 	thing->info->philos = init_philos(thing);
+	thing->info->all_did_eat = 0;
 	if (create_join(thing) == 1)
 		return (1);
 	return (0);
@@ -46,13 +47,22 @@ t_data	*init_philos(t_data *thing)
 	return (philosophers);
 }
 
+void	init_mutex(t_data *thing)
+{
+	int i;
+
+	i = 0;
+	while (i < thing->info->number_of_philosophers)
+		pthread_mutex_init(&thing->info->fork_n[i++], NULL);
+}
+
 int	create_join(t_data *thing)
 {
 	thing->info->i = 0;
 	while (thing->info->i < thing->info->number_of_philosophers)
 	{
 		if (pthread_create(&thing->info->thread[thing->info->i++],
-				NULL, check_if_dead, thing->info->philos) != 0)
+				NULL, do_actions, thing->info->philos) != 0)
 			return (1);
 		usleep(69);
 		thing->info->philos = thing->info->philos->next;

@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:22 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/06 19:57:17 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/15 21:04:18 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void ft_free(t_data *all)
 
 int	main(int argc, char *argv[])
 {
-	atexit(check);
+	// atexit(check);
 	t_data		all;
 	t_basics	stuff;
 

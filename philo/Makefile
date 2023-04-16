@@ -2,7 +2,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -pthread -c
 
-NAME = philosophers
+NAME = philo
 
 SRC_M = heart.c \
 		Utils.c \

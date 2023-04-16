@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:58 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/06 17:51:41 by asadik           ###   ########.fr       */
+/*   Updated: 2023/04/16 20:48:30 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 typedef struct s_basics
 {
 	int					i;
@@ -35,6 +35,7 @@ typedef struct s_basics
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					number_of_times_each_philosopher_must_eat;
+	int					all_did_eat;
 	t_data				*philos;
 	pthread_t			*thread;
 	pthread_mutex_t		*fork_n;
@@ -45,6 +46,7 @@ typedef struct s_data
 	int					end_tail;
 	int					position;
 	long				philo_creation_time;
+	long				last_time_ate;
 	int					is_dead;
 	int					has_eaten;
 	t_basics			*info;
@@ -67,6 +69,7 @@ long		time_stamp(t_data *the_time);
 
 //*		Utils_3
 t_data		*ft_loop_lst(t_data *lst);
+void		ft_print(char *str, t_data *philosopher);
 
 //*		handling_args
 int			handle_args(t_basics *info, int argc, char *argv[]);
@@ -75,11 +78,19 @@ int			check_info(t_basics *info);
 //* initialize
 int			init(t_data *thing);
 t_data		*init_philos(t_data *thing);
+void		init_mutex(t_data *thing);
+
 int			create_join(t_data *thing);
 
 //* actions
+void		*do_actions(void *doingit);
+void		pick_fork(t_data *philo, int n_fork);
+void		eat(t_data *philo);
+void		put_down_forks(t_data *philo, int frst_fork, int scnd_fork);
+void		sleeping_and_thinking(t_data *philo);
+
 void		*check_if_dead(void *ded);
 
-void ft_free(t_data *all);
+void		ft_free(t_data *all);
 
 #endif
