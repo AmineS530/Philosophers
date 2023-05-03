@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:17:02 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/15 21:07:09 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/01 16:57:23 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	handle_args(t_basics *info, int argc, char *argv[])
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
+	info->number_of_times_each_philosopher_must_eat = -1;
 	if (argc == 6)
 	{
 		info->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);

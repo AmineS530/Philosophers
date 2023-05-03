@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:58 by asadik            #+#    #+#             */
-/*   Updated: 2023/04/16 20:48:30 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/01 18:09:48 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_basics
 	t_data				*philos;
 	pthread_t			*thread;
 	pthread_mutex_t		*fork_n;
+	pthread_mutex_t		print_mutex;
 }				t_basics;
 typedef struct s_data
 {
@@ -47,7 +48,6 @@ typedef struct s_data
 	int					position;
 	long				philo_creation_time;
 	long				last_time_ate;
-	int					is_dead;
 	int					has_eaten;
 	t_basics			*info;
 	struct s_data		*next;
@@ -70,6 +70,7 @@ long		time_stamp(t_data *the_time);
 //*		Utils_3
 t_data		*ft_loop_lst(t_data *lst);
 void		ft_print(char *str, t_data *philosopher);
+void		ft_usleep(int time);
 
 //*		handling_args
 int			handle_args(t_basics *info, int argc, char *argv[]);
@@ -87,7 +88,6 @@ void		*do_actions(void *doingit);
 void		pick_fork(t_data *philo, int n_fork);
 void		eat(t_data *philo);
 void		put_down_forks(t_data *philo, int frst_fork, int scnd_fork);
-void		sleeping_and_thinking(t_data *philo);
 
 void		*check_if_dead(void *ded);
 
