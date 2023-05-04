@@ -1,6 +1,6 @@
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -pthread -c
+CFLAGS =  -pthread -c -Wall -Wextra -Werror
 
 NAME = philo
 
