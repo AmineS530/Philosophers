@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:31:00 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/01 17:51:24 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/06 20:39:44 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	create_join(t_data *thing)
 		if (pthread_create(&thing->info->thread[thing->info->i++],
 				NULL, do_actions, thing->info->philos) != 0)
 			return (1);
-		usleep(69);
+		usleep(150);
 		thing->info->philos = thing->info->philos->next;
 	}
 	thing->info->i = 0;

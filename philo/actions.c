@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:35 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/04 17:05:00 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/06 20:49:36 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,18 @@ void	*do_actions(void *doingit)
 	doing = doingit;
 	while (!doing->info->finished && check_if_dead(doing) != 1)
 	{
-		if (doing->info->number_of_times_each_philosopher_must_eat != -1)
-		{
-			if (doing->info->all_did_eat >= doing->info->number_of_times_each_philosopher_must_eat)
-			{
-				doing->info->finished = 1;
-			}
-		}
 		forks[0] = doing->position;
 		forks[1] = doing->next->position;
+		if (doing->info->number_of_philosophers == 1)
+		{
+			ft_usleep(doing->info->time_to_die);
+			check_if_dead(doing);
+			break;
+		}
+
 		pick_fork(doing, forks[0]);
 		pick_fork(doing, forks[1]);
 		eat(doing);
-		check_if_dead(doing);
 		put_down_forks(doing, forks[0], forks[1]);
 		ft_print("is sleeping", doing);
 		ft_usleep(doing->info->time_to_sleep);
@@ -56,8 +55,13 @@ void	eat(t_data *philo)
 	if (philo->info->number_of_times_each_philosopher_must_eat != -1)
 	{
 		if (philo->has_eaten
-			== philo->info->number_of_times_each_philosopher_must_eat)
+			>= philo->info->number_of_times_each_philosopher_must_eat)
 			philo->info->all_did_eat++;
+	}
+	if (philo->info->number_of_times_each_philosopher_must_eat != -1)
+	{
+		if (philo->info->all_did_eat == philo->info->number_of_times_each_philosopher_must_eat)
+			philo->info->finished = TRUE;
 	}
 }
 
@@ -71,8 +75,8 @@ int	check_if_dead(t_data *ded)
 {
 	if (ft_time() - ded->last_time_ate > ded->info->time_to_die)
 	{
-		ded->info->finished = TRUE;
 		ft_print("died", ded);
+		ded->info->finished = TRUE;
 		return(1);
 	}
 	return (0);
