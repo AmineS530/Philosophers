@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:17:02 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/01 16:57:23 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/10 18:23:12 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	check_info(t_basics *info)
 	if (info->number_of_philosophers <= 0)
 		return (ft_print_error(RED"Error\n"
 				"Invalid number of philosophers"DEFAULT));
-	if (info->time_to_die <= 0)
+	if (info->time_to_die < 60)
 		return (ft_print_error(RED"Error\nInvalid Death timer"DEFAULT));
-	if (info->time_to_eat <= 0)
+	if (info->time_to_eat < 60)
 		return (ft_print_error(RED"Error\nInvalid time_to_eat"DEFAULT));
-	if (info->time_to_sleep <= 0)
+	if (info->time_to_sleep < 60)
 		return (ft_print_error(RED"Error\nInvalid Sleep timer"DEFAULT));
 	return (0);
 }

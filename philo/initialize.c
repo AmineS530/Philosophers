@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:31:00 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/06 20:39:44 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/10 18:49:11 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	init(t_data *thing)
 			* (thing->info->number_of_philosophers));
 	if (!thing->info->thread || !thing->info->fork_n)
 		return (1);
-	init_mutex(thing);
 	thing->info->philos = init_philos(thing);
 	thing->info->all_did_eat = 0;
+	init_mutex(thing);
 	if (create_join(thing) == 1)
 		return (1);
 	return (0);
@@ -65,14 +65,9 @@ int	create_join(t_data *thing)
 		if (pthread_create(&thing->info->thread[thing->info->i++],
 				NULL, do_actions, thing->info->philos) != 0)
 			return (1);
-		usleep(150);
+		pthread_detach(thing->info->thread[thing->info->i]);
 		thing->info->philos = thing->info->philos->next;
-	}
-	thing->info->i = 0;
-	while (thing->info->i < thing->info->number_of_philosophers)
-	{
-		if (pthread_join(thing->info->thread[thing->info->i++], NULL) != 0)
-			return (1);
+		usleep(100);
 	}
 	return (0);
 }

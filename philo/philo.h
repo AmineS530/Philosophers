@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:58 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/04 17:02:38 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/10 18:27:29 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ int			create_join(t_data *thing);
 
 //* actions
 void		*do_actions(void *doingit);
-void		pick_fork(t_data *philo, int n_fork);
+void		pick_forks(t_data *philo, int *n_fork);
 void		eat(t_data *philo);
 void		put_down_forks(t_data *philo, int frst_fork, int scnd_fork);
 
-int		check_if_dead(t_data *ded);
+int			check_if_dead(t_data *ded);
 
 void		ft_free(t_data *all);
 
