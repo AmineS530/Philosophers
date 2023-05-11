@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:31:00 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/10 18:49:11 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/11 17:22:05 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	init(t_data *thing)
 {
-	thing->info->thread = malloc(sizeof(pthread_t)
-			* (thing->info->number_of_philosophers));
 	thing->info->fork_n = malloc(sizeof(pthread_mutex_t)
 			* (thing->info->number_of_philosophers));
-	if (!thing->info->thread || !thing->info->fork_n)
+	if (!thing->info->fork_n)
 		return (1);
 	thing->info->philos = init_philos(thing);
 	thing->info->all_did_eat = 0;
@@ -59,15 +57,29 @@ void	init_mutex(t_data *thing)
 
 int	create_join(t_data *thing)
 {
+	thing->info->i = 1;
+	while (thing->info->i <= thing->info->number_of_philosophers)
+	{
+		if (pthread_create(&thing->info->philos->thread,
+				NULL, do_actions, thing->info->philos) != 0)
+			return (1);
+		if (pthread_create(&thing->info->shinigami,
+				NULL, check_if_dead, thing->info->philos) != 0)
+			return (1);
+		pthread_detach(thing->info->shinigami);
+		thing->info->philos = thing->info->philos->next;
+		usleep(100);
+		thing->info->i++;
+	}
 	thing->info->i = 0;
 	while (thing->info->i < thing->info->number_of_philosophers)
 	{
-		if (pthread_create(&thing->info->thread[thing->info->i++],
-				NULL, do_actions, thing->info->philos) != 0)
+		if (pthread_join(thing->info->philos->thread,
+				NULL) != 0)
 			return (1);
-		pthread_detach(thing->info->thread[thing->info->i]);
 		thing->info->philos = thing->info->philos->next;
 		usleep(100);
+		thing->info->i++;
 	}
 	return (0);
 }

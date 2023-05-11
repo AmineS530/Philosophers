@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:22 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/08 17:53:55 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/11 15:40:33 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	check(void)
 void ft_free(t_data *all)
 {
 	ft_lstclear(&all->info->philos);
-	free (all->info->thread);
 	free (all->info->fork_n);
 }
 
