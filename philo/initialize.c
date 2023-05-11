@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:31:00 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/11 17:22:05 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/11 18:21:27 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_data	*init_philos(t_data *thing)
 
 void	init_mutex(t_data *thing)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	pthread_mutex_init(&thing->info->print_mutex, NULL);

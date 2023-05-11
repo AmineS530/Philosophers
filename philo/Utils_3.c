@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 17:48:05 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/11 16:31:44 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/11 18:18:45 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,5 @@ void	ft_print(char *str, t_data *philosopher)
 
 void	ft_usleep(int time)
 {
-	/*long	tm;
-
-	tm = ft_time();
-	while (ft_time() - tm < time)*/
-		usleep(time * 1000);
+	usleep(time * 1000);
 }

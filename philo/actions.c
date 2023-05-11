@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:35 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/11 16:31:51 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/11 18:23:28 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +25,7 @@ void	*do_actions(void *doingit)
 		if (doing->info->number_of_philosophers == 1)
 		{
 			ft_usleep(1000);
-			break;
+			break ;
 		}
 		pick_forks(doing, forks);
 		eat(doing);
@@ -63,7 +62,8 @@ void	eat(t_data *philo)
 		}
 		if (philo->info->number_of_times_each_philosopher_must_eat != -1)
 		{
-			if (philo->info->all_did_eat == philo->info->number_of_times_each_philosopher_must_eat)
+			if (philo->info->all_did_eat
+				== philo->info->number_of_times_each_philosopher_must_eat)
 				philo->info->finished = TRUE;
 		}
 	}
@@ -71,21 +71,22 @@ void	eat(t_data *philo)
 
 void	put_down_forks(t_data *philo, int *fork)
 {
-		pthread_mutex_unlock(&philo->info->fork_n[fork[0]]);
-		pthread_mutex_unlock(&philo->info->fork_n[fork[1]]);
+	pthread_mutex_unlock(&philo->info->fork_n[fork[0]]);
+	pthread_mutex_unlock(&philo->info->fork_n[fork[1]]);
 }
 
 void	*check_if_dead(void *dead)
 {
-	t_data *ded;
+	t_data	*ded;
 
 	ded = dead;
 	while (!ded->info->finished)
 	{
-		if (!ded->info->finished && ft_time() - ded->last_time_ate > ded->info->time_to_die)
+		if (!ded->info->finished && ft_time()
+			- ded->last_time_ate > ded->info->time_to_die)
 		{
 			printf("%ld %d %s\n", time_stamp(ded),
-			ded->position + 1, RED"died"DEFAULT);
+				ded->position + 1, RED"died"DEFAULT);
 			ded->info->finished = TRUE;
 		}
 		usleep(200);

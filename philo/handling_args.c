@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:17:02 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/10 18:23:12 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/11 18:21:59 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	handle_args(t_basics *info, int argc, char *argv[])
 	{
 		info->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 		if (info->number_of_times_each_philosopher_must_eat <= 0)
-			return (ft_print_error(RED"Error\nInvalid Optional argument"DEFAULT));
+			return (ft_print_error(RED
+					"Error\nInvalid Optional argument"DEFAULT));
 	}
 	return (0);
 }
