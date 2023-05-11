@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:35 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/11 18:23:28 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/11 18:34:38 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	*check_if_dead(void *dead)
 				ded->position + 1, RED"died"DEFAULT);
 			ded->info->finished = TRUE;
 		}
-		usleep(200);
+		ft_usleep(10);
 	}
 	return (NULL);
 }

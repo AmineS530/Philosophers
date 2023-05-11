@@ -1,6 +1,6 @@
 CC = cc
 
-CFLAGS =  -pthread -g -Wall -Wextra  -Werror
+CFLAGS = -pthread -Wall -Wextra -Werror
 
 NAME = philo
 
@@ -19,7 +19,7 @@ all: $(NAME)
 $(OBJ_M): philo.h
 
 $(NAME) : $(OBJ_M)
-	$(CC) -g $(OBJ_M) -o $(NAME)
+	$(CC) $(OBJ_M) -o $(NAME)
 
 clean :
 	rm -rf $(OBJ_M)
