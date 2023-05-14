@@ -90,8 +90,6 @@ void		pick_forks(t_data *philo, int *n_fork);
 void		eat(t_data *philo);
 void		put_down_forks(t_data *philo, int *fork);
 
-void		*check_if_dead(void *dead);
-
 void		ft_free(t_data *all);
 
 #endif

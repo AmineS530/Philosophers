@@ -18,7 +18,7 @@ void	*do_actions(void *doingit)
 	int		forks[2];
 
 	doing = (t_data *)doingit;
-	while (!doing->info->finished)
+	while (1)
 	{
 		forks[0] = doing->position;
 		forks[1] = doing->next->position;
@@ -48,24 +48,24 @@ void	pick_forks(t_data *philo, int *n_fork)
 
 void	eat(t_data *philo)
 {
-	if (!philo->info->finished)
+
+	ft_print("is eating", philo);
+	ft_usleep(philo->info->time_to_eat);
+	if ((philo->position % 2) == 0)
+		usleep (200);
+	philo->last_time_ate = ft_time();
+	philo->has_eaten++;
+	if (philo->info->number_of_times_each_philosopher_must_eat != -1)
 	{
-		ft_print("is eating", philo);
-		ft_usleep(philo->info->time_to_eat);
-		philo->last_time_ate = ft_time();
-		philo->has_eaten++;
-		if (philo->info->number_of_times_each_philosopher_must_eat != -1)
-		{
-			if (philo->has_eaten
-				>= philo->info->number_of_times_each_philosopher_must_eat)
-				philo->info->all_did_eat++;
-		}
-		if (philo->info->number_of_times_each_philosopher_must_eat != -1)
-		{
-			if (philo->info->all_did_eat
-				== philo->info->number_of_times_each_philosopher_must_eat)
-				philo->info->finished = TRUE;
-		}
+		if (philo->has_eaten
+			>= philo->info->number_of_times_each_philosopher_must_eat)
+			philo->info->all_did_eat++;
+	}
+	if (philo->info->number_of_times_each_philosopher_must_eat != -1)
+	{
+		if (philo->info->all_did_eat
+			== philo->info->number_of_times_each_philosopher_must_eat)
+			philo->info->finished = TRUE;
 	}
 }
 
@@ -73,23 +73,4 @@ void	put_down_forks(t_data *philo, int *fork)
 {
 	pthread_mutex_unlock(&philo->info->fork_n[fork[0]]);
 	pthread_mutex_unlock(&philo->info->fork_n[fork[1]]);
-}
-
-void	*check_if_dead(void *dead)
-{
-	t_data	*ded;
-
-	ded = dead;
-	while (!ded->info->finished)
-	{
-		if (!ded->info->finished && ft_time()
-			- ded->last_time_ate > ded->info->time_to_die)
-		{
-			printf("%ld %d %s\n", time_stamp(ded),
-				ded->position + 1, RED"died"DEFAULT);
-			ded->info->finished = TRUE;
-		}
-		ft_usleep(10);
-	}
-	return (NULL);
 }

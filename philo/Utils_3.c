@@ -25,13 +25,10 @@ t_data	*ft_loop_lst(t_data *lst)
 
 void	ft_print(char *str, t_data *philosopher)
 {
-	if (!philosopher->info->finished)
-	{
-		pthread_mutex_lock(&philosopher->info->print_mutex);
-		printf("%ld %d %s\n", time_stamp(philosopher),
-			philosopher->position + 1, str);
-		pthread_mutex_unlock(&philosopher->info->print_mutex);
-	}
+	pthread_mutex_lock(&philosopher->info->print_mutex);
+	printf("%ld %d %s\n", time_stamp(philosopher),
+		philosopher->position + 1, str);
+	pthread_mutex_unlock(&philosopher->info->print_mutex);
 }
 
 void	ft_usleep(int time)

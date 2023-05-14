@@ -20,7 +20,7 @@ $(OBJ_M): philo.h
 
 $(NAME) : $(OBJ_M)
 	$(CC) -fsanitize=thread -g $(OBJ_M) -o $(NAME)
-
+	
 clean :
 	rm -rf $(OBJ_M)
 

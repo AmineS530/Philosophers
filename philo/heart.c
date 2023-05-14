@@ -42,12 +42,28 @@ int	main(int argc, char *argv[])
 		all.info->finished = FALSE;
 		if (init(&all) == 1)
 			return (1);
-		ft_free(&all);
+		//ft_free(&all);
 	}
 	else
 		ft_print_error(RED"Usage: ./philosophers number_of_philosophers"
 			" time_to_die time_to_eat time_to_sleep"
 			" [number_of_times_each_philosopher_must_eat]"DEFAULT);
+
+	while (1)
+	{
+		all.info->i = 0;
+		while (all.info->i < all.info->number_of_philosophers)
+		{
+			if ((ft_time() - all.info->philos->last_time_ate) > all.info->time_to_die)
+			{
+			ft_print(RED"died"DEFAULT,all.info->philos);
+			all.info->finished = TRUE;
+			pthread_mutex_lock(&all.info->print_mutex);
+			return (69);
+			}
+			all.info->philos = all.info->philos->next;
+		}	
+	}
 	return (0);
 }
 
