@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:22 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/11 18:31:23 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/14 20:11:02 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int argc, char *argv[])
 			}
 			if (all.info->number_of_times_each_philosopher_must_eat != -1)
 			{
-				if (all.info->philos->has_eaten
+				if (all.info->philos->times_eaten
 					== all.info->number_of_times_each_philosopher_must_eat)
 						all.info->all_did_eat++;
 				if (all.info->all_did_eat

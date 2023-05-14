@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:35 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/11 18:34:38 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/14 20:15:39 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	*do_actions(void *doingit)
 	int		forks[2];
 
 	doing = (t_data *)doingit;
-	while (!doing->info->finished)
+	while (1)
 	{
-		if ((doing->position % 2) == 0)
+		if ((doing->position + 1 % 2) == 0)
 			usleep(200);
 		forks[0] = doing->position;
 		forks[1] = doing->next->position;
@@ -50,10 +50,12 @@ void	eat(t_data *philo)
 {
 	ft_print("is eating", philo);
 	ft_usleep(philo->info->time_to_eat);
+	pthread_mutex_lock(&philo->info->eating);
 	if ((philo->position % 2) == 0)
 		usleep (200);
 	philo->last_time_ate = ft_time();
-	philo->has_eaten++;
+	pthread_mutex_unlock(&philo->info->eating);
+	philo->times_eaten++;
 }
 
 void	put_down_forks(t_data *philo, int fork1, int fork2)
