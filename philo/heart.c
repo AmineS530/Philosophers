@@ -22,8 +22,8 @@ void	check(void)
 
 void	ft_free(t_data *all)
 {
-	ft_lstclear(&all->info->philos);
 	free (all->info->fork_n);
+	ft_lstclear(&all->info->philos);
 }
 
 	//atexit(check);
@@ -42,7 +42,7 @@ int	main(int argc, char *argv[])
 		all.info->finished = FALSE;
 		if (init(&all) == 1)
 			return (1);
-		//ft_free(&all);
+	//	ft_free(&all);
 	}
 	else
 		ft_print_error(RED"Usage: ./philosophers number_of_philosophers"
@@ -61,8 +61,21 @@ int	main(int argc, char *argv[])
 			pthread_mutex_lock(&all.info->print_mutex);
 			return (69);
 			}
+			if (all.info->number_of_times_each_philosopher_must_eat != -1)
+			{
+				if (all.info->philos->has_eaten
+					== all.info->number_of_times_each_philosopher_must_eat)
+						all.info->all_did_eat++;
+				if (all.info->all_did_eat
+					>= all.info->number_of_times_each_philosopher_must_eat)
+				{
+					all.info->finished = TRUE;
+					pthread_mutex_lock(&all.info->print_mutex);
+					return (69);
+				}
+			}
 			all.info->philos = all.info->philos->next;
-		}	
+		}
 	}
 	return (0);
 }

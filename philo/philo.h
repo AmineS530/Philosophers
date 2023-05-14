@@ -86,9 +86,9 @@ int			create_join(t_data *thing);
 
 //* actions
 void		*do_actions(void *doingit);
-void		pick_forks(t_data *philo, int *n_fork);
+void		pick_fork(t_data *philo, int n_fork);
 void		eat(t_data *philo);
-void		put_down_forks(t_data *philo, int *fork);
+void		put_down_forks(t_data *philo, int fork1, int fork2);
 
 void		ft_free(t_data *all);
 

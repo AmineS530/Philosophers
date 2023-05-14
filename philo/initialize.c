@@ -63,7 +63,6 @@ int	create_join(t_data *thing)
 		if (pthread_create(&thing->info->philos->thread,
 				NULL, do_actions, thing->info->philos) != 0)
 			return (1);
-		pthread_detach(thing->info->philos->thread);
 		thing->info->philos = thing->info->philos->next;
 		thing->info->i++;
 	}
