@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:22 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/14 20:11:02 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/15 20:49:41 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,34 +49,6 @@ int	main(int argc, char *argv[])
 			" time_to_die time_to_eat time_to_sleep"
 			" [number_of_times_each_philosopher_must_eat]"DEFAULT);
 
-	while (1)
-	{
-		all.info->i = 0;
-		while (all.info->i < all.info->number_of_philosophers)
-		{
-			if ((ft_time() - all.info->philos->last_time_ate) > all.info->time_to_die)
-			{
-			ft_print(RED"died"DEFAULT,all.info->philos);
-			all.info->finished = TRUE;
-			pthread_mutex_lock(&all.info->print_mutex);
-			return (69);
-			}
-			if (all.info->number_of_times_each_philosopher_must_eat != -1)
-			{
-				if (all.info->philos->times_eaten
-					== all.info->number_of_times_each_philosopher_must_eat)
-						all.info->all_did_eat++;
-				if (all.info->all_did_eat
-					>= all.info->number_of_times_each_philosopher_must_eat)
-				{
-					all.info->finished = TRUE;
-					pthread_mutex_lock(&all.info->print_mutex);
-					return (69);
-				}
-			}
-			all.info->philos = all.info->philos->next;
-		}
-	}
 	return (0);
 }
 

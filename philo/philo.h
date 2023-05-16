@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:58 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/14 20:12:00 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/16 20:54:19 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_basics
 	int					number_of_times_each_philosopher_must_eat;
 	int					all_did_eat;
 	t_data				*philos;
-	pthread_mutex_t		eating;
 	pthread_mutex_t		*fork_n;
 	pthread_mutex_t		print_mutex;
 }				t_basics;
@@ -46,6 +45,7 @@ typedef struct s_data
 	int					real_head;
 	int					end_tail;
 	int					position;
+	pthread_mutex_t		eating;
 	long				philo_creation_time;
 	long				last_time_ate;
 	int					times_eaten;
@@ -89,6 +89,7 @@ void		*do_actions(void *doingit);
 void		pick_fork(t_data *philo, int n_fork);
 void		eat(t_data *philo);
 void		put_down_forks(t_data *philo, int fork1, int fork2);
+void		check_if_dead(t_data *dead);
 
 void		ft_free(t_data *all);
 
