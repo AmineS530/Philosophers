@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:22 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/15 20:49:41 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/17 22:26:13 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@
 
 void	check(void)
 {
-	system("leaks philosophers");
+	system("leaks philo");
 }
 
 void	ft_free(t_data *all)
 {
 	free (all->info->fork_n);
-	ft_lstclear(&all->info->philos);
 }
 
 	//atexit(check);
@@ -42,13 +41,12 @@ int	main(int argc, char *argv[])
 		all.info->finished = FALSE;
 		if (init(&all) == 1)
 			return (1);
-	//	ft_free(&all);
+		ft_free(&all);
 	}
 	else
 		ft_print_error(RED"Usage: ./philosophers number_of_philosophers"
 			" time_to_die time_to_eat time_to_sleep"
 			" [number_of_times_each_philosopher_must_eat]"DEFAULT);
-
 	return (0);
 }
 

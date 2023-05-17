@@ -45,11 +45,11 @@ typedef struct s_data
 	int					real_head;
 	int					end_tail;
 	int					position;
-	pthread_mutex_t		eating;
 	long				philo_creation_time;
 	long				last_time_ate;
 	int					times_eaten;
 	pthread_t			thread;
+	pthread_mutex_t		last_time_ate_mutex;
 	t_basics			*info;
 	struct s_data		*next;
 }				t_data;
@@ -82,7 +82,7 @@ int			init(t_data *thing);
 t_data		*init_philos(t_data *thing);
 void		init_mutex(t_data *thing);
 
-int			create_join(t_data *thing);
+int			create_philos(t_data *thing);
 
 //* actions
 void		*do_actions(void *doingit);

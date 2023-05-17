@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:35 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/16 21:09:51 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/17 22:31:46 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,10 @@ void	*do_actions(void *doingit)
 		forks[0] = doing->position;
 		forks[1] = doing->next->position;
 		pick_fork(doing, forks[0]);
-		if (doing->info->number_of_philosophers == 1)
-		{
-			ft_usleep(1000);
-			break ;
-		}
 		pick_fork(doing, forks[1]);
 		eat(doing);
-		put_down_forks(doing, forks[0], forks[1]);
+		pthread_mutex_unlock(&doing->info->fork_n[forks[0]]);
+		pthread_mutex_unlock(&doing->info->fork_n[forks[1]]);
 		ft_print("is sleeping", doing);
 		ft_usleep(doing->info->time_to_sleep);
 		ft_print("is thinking", doing);
@@ -50,47 +46,50 @@ void	eat(t_data *philo)
 {
 	ft_print("is eating", philo);
 	ft_usleep(philo->info->time_to_eat);
-	pthread_mutex_lock(&philo->eating);
+	pthread_mutex_lock(&philo->last_time_ate_mutex);
 	philo->last_time_ate = ft_time();
-	pthread_mutex_unlock(&philo->eating);
 	philo->times_eaten++;
+	pthread_mutex_unlock(&philo->last_time_ate_mutex);
 }
 
-void	put_down_forks(t_data *philo, int fork1, int fork2)
+int	check_eat_times(t_data *food)
 {
-	pthread_mutex_unlock(&philo->info->fork_n[fork1]);
-	pthread_mutex_unlock(&philo->info->fork_n[fork2]);
+	if (food->info->number_of_times_each_philosopher_must_eat != -1)
+	{
+		if (food->times_eaten
+			== food->info->number_of_times_each_philosopher_must_eat)
+			food->info->all_did_eat++;
+		if (food->info->all_did_eat
+			>= food->info->number_of_times_each_philosopher_must_eat)
+		{
+			pthread_mutex_lock(&food->info->print_mutex);
+			return (1);
+		}
+		pthread_mutex_unlock(&food->last_time_ate_mutex);
+	}
+	return (0);
 }
 
 void	check_if_dead(t_data *dead)
 {
 	dead->info->i = 0;
-
-
 	while (1)
 	{
-		usleep(100);
-		pthread_mutex_lock(&dead->eating);
+		pthread_mutex_lock(&dead->last_time_ate_mutex);
 		if ((ft_time()
-				- dead->info->philos->last_time_ate) > dead->info->time_to_die)
+				- dead->last_time_ate) > dead->info->time_to_die)
 		{
+			pthread_mutex_unlock(&dead->last_time_ate_mutex);
 			ft_print(RED "died" DEFAULT, dead->info->philos);
-			dead->info->finished = TRUE;
 			pthread_mutex_lock(&dead->info->print_mutex);
 			break ;
 		}
-		pthread_mutex_unlock(&dead->eating);
-		if (dead->info->number_of_times_each_philosopher_must_eat != -1)
-		{
-			if (dead->info->philos->times_eaten == dead->info->number_of_times_each_philosopher_must_eat)
-				dead->info->all_did_eat++;
-			if (dead->info->all_did_eat >= dead->info->number_of_times_each_philosopher_must_eat)
-			{
-				dead->info->finished = TRUE;
-				pthread_mutex_lock(&dead->info->print_mutex);
-				break ;
-			}
-		}
+		pthread_mutex_unlock(&dead->last_time_ate_mutex);
+		pthread_mutex_lock(&dead->last_time_ate_mutex);
+		if (check_eat_times(dead) == 1)
+			break ;
+		pthread_mutex_unlock(&dead->last_time_ate_mutex);
 		dead->info->philos = dead->info->philos->next;
+		usleep(100);
 	}
 }

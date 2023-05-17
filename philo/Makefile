@@ -1,7 +1,6 @@
 CC = cc
 
-CFLAGS = -pthread -Wall -Wextra -Werror
-# -fsanitize=thread -g
+CFLAGS = -pthread -Wall -Wextra -Werror #-fsanitize=thread
 
 NAME = philo
 
@@ -20,8 +19,8 @@ all: $(NAME)
 $(OBJ_M): philo.h
 
 $(NAME) : $(OBJ_M)
-	$(CC)  $(OBJ_M) -o $(NAME)
-#-fsanitize=thread -g
+	$(CC) $(OBJ_M) -o $(NAME)
+# -fsanitize=thread
 clean :
 	rm -rf $(OBJ_M)
 

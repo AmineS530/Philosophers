@@ -26,7 +26,7 @@ t_data	*ft_lstnew(int pos)
 		poggers->real_head = FALSE;
 	poggers->end_tail = FALSE;
 	poggers->philo_creation_time = ft_time();
-	pthread_mutex_init(&poggers->eating, NULL);
+	pthread_mutex_init(&poggers->last_time_ate_mutex, NULL);
 	poggers->last_time_ate = poggers->philo_creation_time;
 	poggers->times_eaten = 0;
 	poggers->next = NULL;
