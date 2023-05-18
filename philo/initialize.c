@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:31:00 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/17 22:26:53 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/18 11:13:45 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ void	init_mutex(t_data *thing)
 
 int	create_philos(t_data *thing)
 {
-	thing->info->i = 1;
-	while (thing->info->i <= thing->info->number_of_philosophers)
+	thing->info->i = 0;
+	while (thing->info->i < thing->info->number_of_philosophers)
 	{
 		if (pthread_create(&thing->info->philos->thread,
-				NULL, do_actions, thing->info->philos) != 0)
+				NULL, do_actions, thing) != 0)
 			return (1);
 		pthread_detach(thing->info->philos->thread);
-		thing->info->philos = thing->info->philos->next;
+		thing = thing->next;
 		thing->info->i++;
 	}
 	check_if_dead(thing->info->philos);

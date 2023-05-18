@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:30:22 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/17 22:26:13 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/18 11:06:39 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	check(void)
 
 void	ft_free(t_data *all)
 {
+	int	i;
+
+	i = 0;
+	pthread_mutex_destroy(&all->info->print_mutex);
+	while (i < all->info->number_of_philosophers)
+		pthread_mutex_destroy(&all->info->fork_n[i++]);
 	free (all->info->fork_n);
 }
 

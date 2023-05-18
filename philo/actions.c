@@ -6,7 +6,7 @@
 /*   By: asadik <asadik@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:35 by asadik            #+#    #+#             */
-/*   Updated: 2023/05/17 22:31:46 by asadik           ###   ########.fr       */
+/*   Updated: 2023/05/18 11:20:26 by asadik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ void	check_if_dead(t_data *dead)
 			break ;
 		pthread_mutex_unlock(&dead->last_time_ate_mutex);
 		dead->info->philos = dead->info->philos->next;
-		usleep(100);
+		usleep(200);
 	}
 }
